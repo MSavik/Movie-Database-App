@@ -1,4 +1,4 @@
-package com.example.movie_database_app
+package com.msavik.data
 
 import org.junit.Test
 

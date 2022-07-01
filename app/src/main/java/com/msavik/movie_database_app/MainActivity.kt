@@ -1,4 +1,4 @@
-package com.example.movie_database_app
+package com.msavik.movie_database_app
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
