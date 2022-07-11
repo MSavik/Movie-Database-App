@@ -1,4 +1,4 @@
-package com.msavik.mylibrary.model.movie
+package com.msavik.domain.model.movie
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName

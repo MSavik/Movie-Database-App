@@ -1,4 +1,4 @@
-package com.msavik.mylibrary
+package com.msavik.domain
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

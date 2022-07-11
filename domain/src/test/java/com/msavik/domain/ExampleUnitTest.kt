@@ -1,4 +1,4 @@
-package com.msavik.mylibrary
+package com.msavik.domain
 
 import org.junit.Test
 

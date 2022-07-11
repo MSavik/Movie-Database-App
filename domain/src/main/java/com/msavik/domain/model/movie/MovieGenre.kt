@@ -1,4 +1,4 @@
-package com.msavik.mylibrary.model.movie
+package com.msavik.domain.model.movie
 
 data class MovieGenre(
     val id: Int,

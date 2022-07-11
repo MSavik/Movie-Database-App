@@ -1,4 +1,4 @@
-package com.msavik.mylibrary.model.movie
+package com.msavik.domain.model.movie
 
 data class MovieList(
     val page: Int,

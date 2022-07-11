@@ -1,8 +1,8 @@
 package com.msavik.data.api
 
 import com.msavik.data.utility.BaseUrl.TMDB_API_KEY
-import com.msavik.mylibrary.model.movie.Movie
-import com.msavik.mylibrary.model.movie.MovieList
+import com.msavik.domain.model.movie.Movie
+import com.msavik.domain.model.movie.MovieList
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
