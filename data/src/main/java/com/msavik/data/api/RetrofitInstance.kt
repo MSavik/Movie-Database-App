@@ -1,6 +1,7 @@
 package com.msavik.data.api
 
 import com.google.gson.GsonBuilder
+import com.msavik.data.utility.BaseUrl
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -16,7 +17,7 @@ class RetrofitInstance {
                 .create()
             Retrofit.Builder()
                 .client(client)
-                .baseUrl("")
+                .baseUrl(BaseUrl.TMDB_BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build()
         }
