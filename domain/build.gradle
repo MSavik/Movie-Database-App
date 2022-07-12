@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -50,4 +51,10 @@ dependencies {
     // Coroutine Lifecycle Scopes
     api "androidx.lifecycle:lifecycle-viewmodel-ktx:${libVersions.lifecycle}"
     api "androidx.lifecycle:lifecycle-runtime-ktx:${libVersions.lifecycle}"
+
+    // Koin
+    api "io.insert-koin:koin-android:${libVersions.koin}"
+    api "io.insert-koin:koin-android-compat:${libVersions.koin}"
+    api "io.insert-koin:koin-androidx-workmanager:${libVersions.koin}"
+    api "io.insert-koin:koin-androidx-navigation:${libVersions.koin}"
 }
