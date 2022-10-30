@@ -6,4 +6,8 @@ import com.msavik.domain.utility.Resource
 interface MovieRepository {
 
     suspend fun getPopularMoviesList(): List<Movie>
+
+    suspend fun getTopRatedMoviesList(): List<Movie>
+
+    suspend fun getUpcomingMoviesList(): List<Movie>
 }

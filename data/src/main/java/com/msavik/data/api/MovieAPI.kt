@@ -35,4 +35,20 @@ interface MovieAPI {
         @Query("page")
         page: Int = 1
     ): Call<MovieList>
+
+    @GET("movie/top_rated")
+    fun getTopRatedMoviesList(
+        @Query("api_key")
+        api_key: String = TMDB_API_KEY,
+        @Query("page")
+        page: Int = 1
+    ): Call<MovieList>
+
+    @GET("movie/upcoming")
+    fun getUpcomingMoviesList(
+        @Query("api_key")
+        api_key: String = TMDB_API_KEY,
+        @Query("page")
+        page: Int = 1
+    ): Call<MovieList>
 }
