@@ -6,6 +6,9 @@
         <entry key="..\:/Users/xmmar/AndroidStudioProjects/Movie-Database-App/app/src/main/res/layout/activity_home.xml" value="0.23958333333333334" />
         <entry key="..\:/Users/xmmar/AndroidStudioProjects/Movie-Database-App/app/src/main/res/layout/activity_main.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/xmmar/AndroidStudioProjects/Movie-Database-App/app/src/main/res/layout/fragment_home.xml" value="0.11302083333333333" />
+        <entry key="..\:/Users/xmmar/AndroidStudioProjects/Movie-Database-App/app/src/main/res/layout/fragment_popular.xml" value="0.23958333333333334" />
+        <entry key="..\:/Users/xmmar/AndroidStudioProjects/Movie-Database-App/app/src/main/res/layout/fragment_top_rated.xml" value="0.23958333333333334" />
+        <entry key="..\:/Users/xmmar/AndroidStudioProjects/Movie-Database-App/app/src/main/res/layout/fragment_upcoming.xml" value="0.23958333333333334" />
         <entry key="..\:/Users/xmmar/AndroidStudioProjects/Movie-Database-App/app/src/main/res/layout/item_movie_details.xml" value="0.23958333333333334" />
       </map>
     </option>

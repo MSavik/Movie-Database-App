@@ -51,6 +51,8 @@ dependencies {
     // Coroutine Lifecycle Scopes
     api "androidx.lifecycle:lifecycle-viewmodel-ktx:${libVersions.lifecycle}"
     api "androidx.lifecycle:lifecycle-runtime-ktx:${libVersions.lifecycle}"
+    api "androidx.lifecycle:lifecycle-common-java8:${libVersions.lifecycle}"
+    api "androidx.lifecycle:lifecycle-livedata-ktx:${libVersions.lifecycle}"
 
     // Koin
     api "io.insert-koin:koin-android:${libVersions.koin}"

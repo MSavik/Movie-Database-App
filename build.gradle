@@ -9,13 +9,15 @@ buildscript {
         gradleVersion = '7.2.1'
         libVersions = [
                 coreKtx             : '1.8.0',
-                appcompat           : '1.4.2',
-                material            : '1.6.1',
+                appcompat           : '1.5.1',
+                material            : '1.7.0',
                 retrofit            : '2.9.0',
                 coroutines          : '1.6.1',
-                lifecycle           : '2.5.0',
+                lifecycle           : '2.5.1',
                 constraintlayout    : '2.1.4',
-                koin                : '3.2.0'
+                koin                : '3.2.0',
+                swiperefresh        : '1.1.0',
+                fragmentKtx         : '1.5.3'
         ]
         moduleNames = [
                 data        : 'data',
