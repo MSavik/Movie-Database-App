@@ -13,9 +13,6 @@ class HomePagerAdapter(private val fragment: Fragment) : FragmentStateAdapter(fr
         return when(position) {
             0 -> {
                 PopularFragment()
-//                    .apply {
-//                    arguments = fragment.requireArguments()
-//                }
             }
             1 -> {
                 TopRatedFragment()

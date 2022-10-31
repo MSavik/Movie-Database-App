@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
+import androidx.appcompat.widget.SearchView
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayoutMediator
 import com.msavik.domain.model.movie.Movie
@@ -16,7 +17,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private lateinit var binding: FragmentHomeBinding
     private val viewModel: MovieViewModel by sharedViewModel()
-    var dataTable: List<Movie> = emptyList()
+    val popularMovieAdapter = MovieAdapter()
+    val topRatedMovieAdapter = MovieAdapter()
+    val upcomingMovieAdapter = MovieAdapter()
+    var popularMoviesList: List<Movie> = emptyList()
+    var topRatedMoviesList: List<Movie> = emptyList()
+    var upcomingMoviesList: List<Movie> = emptyList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +36,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         viewModel.getPopularMoviesList()
         viewModel.getTopRatedMoviesList()
         viewModel.getUpcomingMoviesList()
+        setMovieFilter()
     }
 
     private fun initObserver() {
@@ -44,9 +51,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                     response.data?.let { movieList ->
                         binding.srlHome.isRefreshing = false
                         Log.d(TAG, "Success!")
-                        dataTable = movieList
+                        popularMoviesList = movieList
 
-                        Log.d(TAG, "LOGOBSERVER: $dataTable")
+                        Log.d(TAG, "LOGOBSERVER: $popularMoviesList")
 
                         initView()
                     }
@@ -71,9 +78,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                     response.data?.let { movieList ->
                         binding.srlHome.isRefreshing = false
                         Log.d(TAG, "Success!")
-                        dataTable = movieList
+                        topRatedMoviesList = movieList
 
-                        Log.d(TAG, "LOGOBSERVER: $dataTable")
+                        Log.d(TAG, "LOGOBSERVER: $topRatedMoviesList")
                     }
                 }
                 is Resource.Error -> {
@@ -96,9 +103,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                     response.data?.let { movieList ->
                         binding.srlHome.isRefreshing = false
                         Log.d(TAG, "Success!")
-                        dataTable = movieList
+                        upcomingMoviesList = movieList
 
-                        Log.d(TAG, "LOGOBSERVER: $dataTable")
+                        Log.d(TAG, "LOGOBSERVER: $upcomingMoviesList")
                     }
                 }
                 is Resource.Error -> {
@@ -114,7 +121,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun initView() {
         binding.apply {
-
             srlHome.setOnRefreshListener {
                 when(tlHome.selectedTabPosition) {
                     0 -> { viewModel.getPopularMoviesList() }
@@ -139,6 +145,48 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 }
             }.attach()
         }
+    }
+
+    private fun setMovieFilter() {
+        binding.svHome.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                var movieList: List<Movie> = emptyList()
+                val movieAdapter: MovieAdapter
+                val filteredMovies = ArrayList<Movie>()
+
+                when(binding.tlHome.selectedTabPosition) {
+                    0 -> {
+                        movieList = popularMoviesList
+                        movieAdapter = popularMovieAdapter
+                    }
+                    1 -> {
+                        movieList = topRatedMoviesList
+                        movieAdapter = topRatedMovieAdapter
+                    }
+                    2 -> {
+                        movieList = upcomingMoviesList
+                        movieAdapter = upcomingMovieAdapter
+                    }
+                    else -> {
+                        movieAdapter = popularMovieAdapter
+                    }
+                }
+
+                movieList.forEach {
+                    if (it.title.lowercase().contains(newText?.lowercase() ?: "")) {
+                        filteredMovies.add(it)
+                    }
+                }
+
+                movieAdapter.submitList(filteredMovies)
+                movieAdapter.notifyDataSetChanged()
+                return false
+            }
+        })
     }
 
     companion object {
