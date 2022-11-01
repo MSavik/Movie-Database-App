@@ -15,18 +15,21 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/black">
+            android:background="@color/vampire_black">
 
             <androidx.appcompat.widget.SearchView
+                style="@style/SearchViewStyle"
+                android:theme="@style/SearchViewStyle"
                 android:id="@+id/svHome"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/tlHome"
                 app:queryHint="Search movie..."
-                android:background="@drawable/background_search_view"
-                app:queryBackground="@android:color/transparent"/>
+                android:layout_marginHorizontal="@dimen/margin_medium"
+                android:layout_marginVertical="@dimen/margin_medium"/>
 
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tlHome"
@@ -34,7 +37,11 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/svHome"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintEnd_toEndOf="parent"
+                android:background="@color/vampire_black"
+                app:tabTextColor="@color/white"
+                app:tabSelectedTextColor="@color/deep_lemon"
+                app:tabIndicatorColor="@color/deep_lemon"/>
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/vpHome"
