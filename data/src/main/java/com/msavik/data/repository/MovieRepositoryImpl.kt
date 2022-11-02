@@ -13,27 +13,7 @@ class MovieRepositoryImpl : MovieRepository {
         val response = RetrofitUtils.execute(retrofitCall)
         val movieList = response.checkAndParseResponse()
         return movieList.results
-
-//        if (response.isSuccessful && response.body() != null) {
-//            return response.body()!!.results
-//        } else {
-//            throw Exception(response.errorBody().toString())
-//        }
     }
-
-//    override suspend fun getPopularMoviesList(): List<Movie> {
-//        val retrofitCall = RetrofitInstance.api.getPopularMoviesList()
-//        try {
-//            val response = retrofitCall.execute()
-//            if (response.isSuccessful && response.body() != null) {
-//                return response.body()!!.results
-//            } else {
-//                throw Exception(response.errorBody().toString())
-//            }
-//        } catch (e: Exception) {
-//            throw Exception("NETWORK ERROR")
-//        }
-//    }
 
     override suspend fun getTopRatedMoviesList(): List<Movie> {
         val retrofitCall = RetrofitInstance.api.getTopRatedMoviesList()
@@ -47,5 +27,11 @@ class MovieRepositoryImpl : MovieRepository {
         val response = RetrofitUtils.execute(retrofitCall)
         val movieList = response.checkAndParseResponse()
         return movieList.results
+    }
+
+    override suspend fun getMovieById(id: Int): Movie {
+        val retrofitCall = RetrofitInstance.api.getMovieById(id)
+        val response = RetrofitUtils.execute(retrofitCall)
+        return response.checkAndParseResponse()
     }
 }
