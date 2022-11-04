@@ -18,7 +18,8 @@ buildscript {
                 koin                : '3.2.0',
                 swiperefresh        : '1.1.0',
                 fragmentKtx         : '1.5.3',
-                glide               : '4.14.2'
+                glide               : '4.14.2',
+                navigation          : '2.5.3'
         ]
         moduleNames = [
                 data        : 'data',

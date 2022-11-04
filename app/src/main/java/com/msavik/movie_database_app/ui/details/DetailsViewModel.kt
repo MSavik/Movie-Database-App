@@ -16,11 +16,11 @@ class DetailsViewModel(
 
     val movieLiveData: MutableLiveData<Resource<Movie>> = MutableLiveData()
 
-    fun getPopularMoviesList() = viewModelScope.launch(Dispatchers.IO) {
+    fun getMovieById(id: Int) = viewModelScope.launch(Dispatchers.IO) {
         movieLiveData.postValue(Resource.Loading())
 
         try {
-            val response = getMovieByIdUseCase.execute()
+            val response = getMovieByIdUseCase.execute(id)
             movieLiveData.postValue(Resource.Success(response))
         } catch (e: Exception) {
             Log.e(TAG, "getMovieById: $e")

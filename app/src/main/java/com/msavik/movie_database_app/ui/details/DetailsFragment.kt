@@ -27,10 +27,17 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentDetailsBinding.bind(view)
+
+        val movieId = arguments?.let { bundle ->
+            bundle.getString("movieId")?.toInt()
+        }
+
+        viewModel.getMovieById(movieId ?: 111111)
+        initObserver()
     }
 
     private fun initObserver() {
-        viewModel.movieLiveData.observe(this) { response ->
+        viewModel.movieLiveData.observe(viewLifecycleOwner) { response ->
             when(response) {
                 is Resource.Loading -> {
                     Log.d(HomeFragment.TAG, "Loading...")
@@ -62,14 +69,21 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
                 .diskCacheStrategy(DiskCacheStrategy.DATA)
                 .into(ivMovie)
 
+            val stringList = mutableListOf<String>()
+
             tvTitle.text = movie.title
             tvOverview.text = movie.overview
-            tvVoteAverage.text = movie.vote_average.toString()
+            tvVoteAverage.text = String.format("%.1f", movie.vote_average)
             tvReleaseDate.text = DateFormat.getDateInstance().format(
                 SimpleDateFormat("yyyy-mm-dd", Locale.ENGLISH).parse(movie.release_date) ?: ""
             )
 
-            val stringList = mutableListOf<String>()
+            movie.genres?.forEach {
+                stringList.add(it.name)
+            }
+            tvGenres.text = stringList.joinToString(", ")
+            stringList.clear()
+
             movie.production_countries?.forEach {
                 stringList.add(it.name)
             }

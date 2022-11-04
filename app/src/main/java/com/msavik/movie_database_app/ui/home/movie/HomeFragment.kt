@@ -172,6 +172,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                         movieAdapter = upcomingMovieAdapter
                     }
                     else -> {
+                        movieList = popularMoviesList
                         movieAdapter = popularMovieAdapter
                     }
                 }

@@ -43,8 +43,14 @@ dependencies {
     implementation "androidx.constraintlayout:constraintlayout:${libVersions.constraintlayout}"
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:${libVersions.swiperefresh}"
 
+    // Glide
     implementation "com.github.bumptech.glide:glide:${libVersions.glide}"
     annotationProcessor "com.github.bumptech.glide:compiler:${libVersions.glide}"
+
+    // Navigation
+    implementation "androidx.navigation:navigation-fragment-ktx:${libVersions.navigation}"
+    implementation "androidx.navigation:navigation-ui-ktx:${libVersions.navigation}"
+    implementation "androidx.navigation:navigation-dynamic-features-fragment:${libVersions.navigation}"
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

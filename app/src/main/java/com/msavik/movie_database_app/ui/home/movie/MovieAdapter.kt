@@ -2,6 +2,8 @@ package com.msavik.movie_database_app.ui.home.movie
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -9,6 +11,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.msavik.data.utility.BaseUrl
 import com.msavik.domain.model.movie.Movie
+import com.msavik.movie_database_app.R
 import com.msavik.movie_database_app.databinding.ItemMovieDetailsBinding
 import java.text.DateFormat
 import java.text.SimpleDateFormat
@@ -31,6 +34,11 @@ class MovieAdapter : ListAdapter<Movie, MovieAdapter.ViewHolder>(ItemDiffCallbac
     ) : RecyclerView.ViewHolder(binding.root) {
         open fun bindTo(movie: Movie) {
             binding.apply {
+                clMovieItem.setOnClickListener {
+                    val bundle = bundleOf("movieId" to movie.id.toString())
+                    itemView.findNavController().navigate(R.id.detailsFragment, bundle)
+                }
+
                 Glide.with(this@ViewHolder.itemView.context)
                     .load(BaseUrl.BASE_IMAGE_URL + movie.poster_path)
                     .diskCacheStrategy(DiskCacheStrategy.DATA)
@@ -40,7 +48,7 @@ class MovieAdapter : ListAdapter<Movie, MovieAdapter.ViewHolder>(ItemDiffCallbac
                 tvReleaseDate.text = DateFormat.getDateInstance().format(
                     SimpleDateFormat("yyyy-mm-dd", Locale.ENGLISH).parse(movie.release_date) ?: ""
                 )
-                tvRating.text = "${movie.vote_average.toString()} / 10"
+                tvRating.text = "${movie.vote_average} / 10"
             }
         }
     }
