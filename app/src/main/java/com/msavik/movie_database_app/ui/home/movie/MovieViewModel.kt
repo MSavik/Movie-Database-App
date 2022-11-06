@@ -5,9 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.msavik.domain.model.movie.Movie
-import com.msavik.domain.usecases.GetPopularMoviesListUseCase
-import com.msavik.domain.usecases.GetTopRatedMoviesListUseCase
-import com.msavik.domain.usecases.GetUpcomingMoviesListUseCase
+import com.msavik.domain.usecases.*
 import com.msavik.domain.utility.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -16,6 +14,9 @@ class MovieViewModel(
     private val getPopularMoviesListUseCase: GetPopularMoviesListUseCase,
     private val getTopRatedMoviesListUseCase: GetTopRatedMoviesListUseCase,
     private val getUpcomingMoviesListUseCase: GetUpcomingMoviesListUseCase,
+    private val deletePopularMovieListUseCase: DeletePopularMovieListUseCase,
+    private val deleteTopRatedMovieListUseCase: DeleteTopRatedMovieListUseCase,
+    private val deleteUpcomingMovieListUseCase: DeleteUpcomingMovieListUseCase
 ) : ViewModel() {
 
     val popularMovieListLiveData: MutableLiveData<Resource<List<Movie>>> = MutableLiveData()
@@ -55,6 +56,33 @@ class MovieViewModel(
         } catch (e: Exception) {
             Log.e(TAG, "getUpcomingMoviesList: $e")
             upcomingMovieListLiveData.postValue(Resource.Error(e.message ?: e.toString()))
+        }
+    }
+
+    fun deletePopularMovieList() = viewModelScope.launch(Dispatchers.IO) {
+
+        try {
+            deletePopularMovieListUseCase.execute()
+        } catch (e: Exception) {
+            Log.e(TAG, "deletePopularMovieList: $e")
+        }
+    }
+
+    fun deleteTopRatedMovieList() = viewModelScope.launch(Dispatchers.IO) {
+
+        try {
+            deleteTopRatedMovieListUseCase.execute()
+        } catch (e: Exception) {
+            Log.e(TAG, "deleteTopRatedMovieList: $e")
+        }
+    }
+
+    fun deleteUpcomingMovieList() = viewModelScope.launch(Dispatchers.IO) {
+
+        try {
+            deleteUpcomingMovieListUseCase.execute()
+        } catch (e: Exception) {
+            Log.e(TAG, "deleteUpcomingMovieList: $e")
         }
     }
 

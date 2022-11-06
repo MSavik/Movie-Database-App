@@ -27,6 +27,8 @@ interface MovieRepository {
 
     suspend fun deletePopularMovieDatabase(movie: Movie)
 
+    suspend fun deleteAllPopularMoviesDatabase()
+
     /* TopRated */
     suspend fun upsertTopRatedMovieDatabase(movie: Movie)
 
@@ -36,6 +38,8 @@ interface MovieRepository {
 
     suspend fun deleteTopRatedMovieDatabase(movie: Movie)
 
+    suspend fun deleteAllTopRatedMoviesDatabase()
+
     /* Upcoming */
     suspend fun upsertUpcomingMovieDatabase(movie: Movie)
 
@@ -44,4 +48,6 @@ interface MovieRepository {
     fun getUpcomingMovieListDatabase(): List<Movie>
 
     suspend fun deleteUpcomingMovieDatabase(movie: Movie)
+
+    suspend fun deleteAllUpcomingMoviesDatabase()
 }

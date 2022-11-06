@@ -70,6 +70,10 @@ class MovieRepositoryImpl(private val database: MovieDatabase) : MovieRepository
     override suspend fun deletePopularMovieDatabase(movie: Movie) =
         database.getMovieDao().deletePopularMovie(popularMovieMapper.mapToEntity(movie))
 
+    override suspend fun deleteAllPopularMoviesDatabase() {
+        database.getMovieDao().deleteAllPopularMovies()
+    }
+
     /* TopRated */
     override suspend fun upsertTopRatedMovieDatabase(movie: Movie) =
         database.getMovieDao().upsertTopRatedMovie(topRatedMovieMapper.mapToEntity(movie))
@@ -92,6 +96,10 @@ class MovieRepositoryImpl(private val database: MovieDatabase) : MovieRepository
     override suspend fun deleteTopRatedMovieDatabase(movie: Movie) =
         database.getMovieDao().deleteTopRatedMovie(topRatedMovieMapper.mapToEntity(movie))
 
+    override suspend fun deleteAllTopRatedMoviesDatabase() {
+        database.getMovieDao().deleteAllTopRatedMovies()
+    }
+
     /* Upcoming */
     override suspend fun upsertUpcomingMovieDatabase(movie: Movie) =
         database.getMovieDao().upsertUpcomingMovie(upcomingMovieMapper.mapToEntity(movie))
@@ -113,4 +121,8 @@ class MovieRepositoryImpl(private val database: MovieDatabase) : MovieRepository
 
     override suspend fun deleteUpcomingMovieDatabase(movie: Movie) =
         database.getMovieDao().deleteUpcomingMovie(upcomingMovieMapper.mapToEntity(movie))
+
+    override suspend fun deleteAllUpcomingMoviesDatabase() {
+        database.getMovieDao().deleteAllUpcomingMovies()
+    }
 }

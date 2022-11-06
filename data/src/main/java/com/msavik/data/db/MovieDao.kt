@@ -21,6 +21,9 @@ interface MovieDao {
     @Delete
     suspend fun deletePopularMovie(movie: PopularMovieEntity)
 
+    @Query("DELETE FROM popular_movie")
+    suspend fun deleteAllPopularMovies()
+
     /* TopRated */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun upsertTopRatedMovie(movie: TopRatedMovieEntity)
@@ -34,6 +37,10 @@ interface MovieDao {
     @Delete
     suspend fun deleteTopRatedMovie(movie: TopRatedMovieEntity)
 
+    @Query("DELETE FROM top_rated_movie")
+    suspend fun deleteAllTopRatedMovies()
+
+
     /* Upcoming */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun upsertUpcomingMovie(movie: UpcomingMovieEntity)
@@ -46,4 +53,7 @@ interface MovieDao {
 
     @Delete
     suspend fun deleteUpcomingMovie(movie: UpcomingMovieEntity)
+
+    @Query("DELETE FROM upcoming_movie")
+    suspend fun deleteAllUpcomingMovies()
 }
