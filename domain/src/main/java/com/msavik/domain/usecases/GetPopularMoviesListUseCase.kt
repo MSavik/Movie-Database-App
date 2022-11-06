@@ -7,6 +7,15 @@ class GetPopularMoviesListUseCase(
     private val repository: MovieRepository
 ) : BaseUseCase<Unit?, List<Movie>>() {
     override suspend fun execute(params: Unit?): List<Movie> {
-        return repository.getPopularMoviesList()
+        val cachedMovieList = repository.getPopularMovieListDatabase()
+        return if (cachedMovieList.isNotEmpty()) {
+            cachedMovieList
+        } else {
+            val response = repository.getPopularMoviesList()
+            for (movie in response) {
+                repository.upsertPopularMovieDatabase(movie)
+            }
+            response
+        }
     }
 }

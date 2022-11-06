@@ -1,9 +1,6 @@
 package com.msavik.domain.di
 
-import com.msavik.domain.usecases.GetMovieByIdUseCase
-import com.msavik.domain.usecases.GetPopularMoviesListUseCase
-import com.msavik.domain.usecases.GetTopRatedMoviesListUseCase
-import com.msavik.domain.usecases.GetUpcomingMoviesListUseCase
+import com.msavik.domain.usecases.*
 import org.koin.dsl.module
 
 val domainModule = module {
@@ -11,5 +8,7 @@ val domainModule = module {
     factory { GetPopularMoviesListUseCase(get()) }
     factory { GetTopRatedMoviesListUseCase(get()) }
     factory { GetUpcomingMoviesListUseCase(get()) }
-    factory { GetMovieByIdUseCase(get()) }
+    factory { GetPopularMovieByIdUseCase(get()) }
+    factory { GetTopRatedMovieByIdUseCase(get()) }
+    factory { GetUpcomingMovieByIdUseCase(get()) }
 }

@@ -7,6 +7,15 @@ class GetUpcomingMoviesListUseCase(
     private val repository: MovieRepository
 ) : BaseUseCase<Unit?, List<Movie>>() {
     override suspend fun execute(params: Unit?): List<Movie> {
-        return repository.getUpcomingMoviesList()
+        val cachedMovieList = repository.getUpcomingMovieListDatabase()
+        return if (cachedMovieList.isNotEmpty()) {
+            cachedMovieList
+        } else {
+            val response = repository.getUpcomingMoviesList()
+            for (movie in response) {
+                repository.upsertUpcomingMovieDatabase(movie)
+            }
+            response
+        }
     }
 }
