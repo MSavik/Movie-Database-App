@@ -59,4 +59,15 @@ dependencies {
     api "io.insert-koin:koin-android-compat:${libVersions.koin}"
     api "io.insert-koin:koin-androidx-workmanager:${libVersions.koin}"
     api "io.insert-koin:koin-androidx-navigation:${libVersions.koin}"
+
+    // Room
+    api "androidx.room:room-runtime:${libVersions.room}"
+    api "androidx.room:room-ktx:${libVersions.room}"
+    annotationProcessor "androidx.room:room-compiler:${libVersions.room}"
+    kapt "androidx.room:room-compiler:${libVersions.room}"
+    api "androidx.room:room-rxjava2:${libVersions.room}"
+    api "androidx.room:room-rxjava3:${libVersions.room}"
+    api "androidx.room:room-guava:${libVersions.room}"
+    // optional - Paging 3 Integration
+//    api "androidx.room:room-paging:2.5.0-beta01"
 }

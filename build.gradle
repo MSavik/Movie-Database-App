@@ -19,7 +19,8 @@ buildscript {
                 swiperefresh        : '1.1.0',
                 fragmentKtx         : '1.5.3',
                 glide               : '4.14.2',
-                navigation          : '2.5.3'
+                navigation          : '2.5.3',
+                room                : '2.4.3'
         ]
         moduleNames = [
                 data        : 'data',
