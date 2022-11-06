@@ -11,19 +11,34 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
 
-    val movieViewModel: MovieViewModel by viewModel()
+    private val movieViewModel: MovieViewModel by viewModel()
 
-    lateinit var binding: ActivityMainBinding
-    lateinit var navController: NavController
+    private lateinit var binding: ActivityMainBinding
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        if (isFirstStart) {
+            isFirstStart = false
+            clearDatabase()
+        }
+
         val navHostFragment = supportFragmentManager
             .findFragmentById(R.id.fragment) as NavHostFragment
 
         navController = navHostFragment.navController
+    }
+
+    private fun clearDatabase() {
+        movieViewModel.deletePopularMovieList()
+        movieViewModel.deleteTopRatedMovieList()
+        movieViewModel.deleteUpcomingMovieList()
+    }
+
+    companion object {
+        private var isFirstStart = true
     }
 }
