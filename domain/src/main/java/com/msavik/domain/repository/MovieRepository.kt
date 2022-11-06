@@ -5,6 +5,8 @@ import com.msavik.domain.utility.Resource
 
 interface MovieRepository {
 
+    /* API calls */
+
     suspend fun getPopularMoviesList(): List<Movie>
 
     suspend fun getTopRatedMoviesList(): List<Movie>
@@ -12,4 +14,34 @@ interface MovieRepository {
     suspend fun getUpcomingMoviesList(): List<Movie>
 
     suspend fun getMovieById(id: Int): Movie
+
+
+    /* DB calls */
+
+    /* Popular */
+    suspend fun upsertPopularMovieDatabase(movie: Movie)
+
+    fun getPopularMovieByIdDatabase(id: Int): Movie
+
+    fun getPopularMovieListDatabase(): List<Movie>
+
+    suspend fun deletePopularMovieDatabase(movie: Movie)
+
+    /* TopRated */
+    suspend fun upsertTopRatedMovieDatabase(movie: Movie)
+
+    fun getTopRatedMovieByIdDatabase(id: Int): Movie
+
+    fun getTopRatedMovieListDatabase(): List<Movie>
+
+    suspend fun deleteTopRatedMovieDatabase(movie: Movie)
+
+    /* Upcoming */
+    suspend fun upsertUpcomingMovieDatabase(movie: Movie)
+
+    fun getUpcomingMovieByIdDatabase(id: Int): Movie
+
+    fun getUpcomingMovieListDatabase(): List<Movie>
+
+    suspend fun deleteUpcomingMovieDatabase(movie: Movie)
 }
