@@ -11,13 +11,14 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.msavik.data.utility.BaseUrl
 import com.msavik.domain.model.movie.Movie
+import com.msavik.domain.utility.Page
 import com.msavik.movie_database_app.R
 import com.msavik.movie_database_app.databinding.ItemMovieDetailsBinding
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
-class MovieAdapter : ListAdapter<Movie, MovieAdapter.ViewHolder>(ItemDiffCallback()) {
+class MovieAdapter(val page: Page, val onItemClick: (Int, Page) -> Unit) : ListAdapter<Movie, MovieAdapter.ViewHolder>(ItemDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieAdapter.ViewHolder {
         return ViewHolder(
@@ -35,8 +36,7 @@ class MovieAdapter : ListAdapter<Movie, MovieAdapter.ViewHolder>(ItemDiffCallbac
         open fun bindTo(movie: Movie) {
             binding.apply {
                 clMovieItem.setOnClickListener {
-                    val bundle = bundleOf("movieId" to movie.id.toString())
-                    itemView.findNavController().navigate(R.id.detailsFragment, bundle)
+                    onItemClick(movie.id, page)
                 }
 
                 Glide.with(this@ViewHolder.itemView.context)

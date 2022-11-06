@@ -5,22 +5,41 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.msavik.domain.model.movie.Movie
-import com.msavik.domain.usecases.GetMovieByIdUseCase
+import com.msavik.domain.usecases.GetPopularMovieByIdUseCase
+import com.msavik.domain.usecases.GetTopRatedMovieByIdUseCase
+import com.msavik.domain.usecases.GetUpcomingMovieByIdUseCase
+import com.msavik.domain.utility.Page
 import com.msavik.domain.utility.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class DetailsViewModel(
-    private val getMovieByIdUseCase: GetMovieByIdUseCase
+    private val getPopularMovieByIdUseCase: GetPopularMovieByIdUseCase,
+    private val getTopRatedMovieByIdUseCase: GetTopRatedMovieByIdUseCase,
+    private val getUpcomingMovieByIdUseCase: GetUpcomingMovieByIdUseCase
 ) : ViewModel() {
 
     val movieLiveData: MutableLiveData<Resource<Movie>> = MutableLiveData()
 
-    fun getMovieById(id: Int) = viewModelScope.launch(Dispatchers.IO) {
+    fun getMovieById(id: Int, page: String) = viewModelScope.launch(Dispatchers.IO) {
         movieLiveData.postValue(Resource.Loading())
 
         try {
-            val response = getMovieByIdUseCase.execute(id)
+            val response = when(page) {
+                Page.POPULAR.name -> {
+                    getPopularMovieByIdUseCase.execute(id)
+                }
+                Page.TOP_RATED.name -> {
+                    getTopRatedMovieByIdUseCase.execute(id)
+                }
+                Page.UPCOMING.name -> {
+                    getUpcomingMovieByIdUseCase.execute(id)
+                }
+                else -> {
+                    throw Exception()
+                }
+            }
+
             movieLiveData.postValue(Resource.Success(response))
         } catch (e: Exception) {
             Log.e(TAG, "getMovieById: $e")

@@ -5,9 +5,12 @@ import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.appcompat.widget.SearchView
+import androidx.core.os.bundleOf
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayoutMediator
 import com.msavik.domain.model.movie.Movie
+import com.msavik.domain.utility.Page
 import com.msavik.domain.utility.Resource
 import com.msavik.movie_database_app.R
 import com.msavik.movie_database_app.databinding.FragmentHomeBinding
@@ -17,9 +20,15 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private lateinit var binding: FragmentHomeBinding
     private val viewModel: MovieViewModel by sharedViewModel()
-    val popularMovieAdapter = MovieAdapter()
-    val topRatedMovieAdapter = MovieAdapter()
-    val upcomingMovieAdapter = MovieAdapter()
+    val popularMovieAdapter = MovieAdapter(Page.POPULAR) { movieId, _ ->
+        onItemClick(movieId, Page.POPULAR)
+    }
+    val topRatedMovieAdapter = MovieAdapter(Page.TOP_RATED) { movieId, _ ->
+        onItemClick(movieId, Page.TOP_RATED)
+    }
+    val upcomingMovieAdapter = MovieAdapter(Page.UPCOMING) { movieId, _ ->
+        onItemClick(movieId, Page.UPCOMING)
+    }
     var popularMoviesList: List<Movie> = emptyList()
     var topRatedMoviesList: List<Movie> = emptyList()
     var upcomingMoviesList: List<Movie> = emptyList()
@@ -154,7 +163,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                var movieList: List<Movie> = emptyList()
+                val movieList: List<Movie>
                 val movieAdapter: MovieAdapter
                 val filteredMovies = ArrayList<Movie>()
 
@@ -188,6 +197,14 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 return false
             }
         })
+    }
+
+    private fun onItemClick(movieId: Int, page: Page) {
+        val bundle = bundleOf(
+            "movieId" to movieId.toString(),
+            "page" to page.name
+        )
+        findNavController().navigate(R.id.detailsFragment, bundle)
     }
 
     companion object {

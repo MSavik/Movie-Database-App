@@ -2,13 +2,14 @@ package com.msavik.movie_database_app.ui.details
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.View
+import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.google.android.material.snackbar.Snackbar
 import com.msavik.data.utility.BaseUrl
 import com.msavik.domain.model.movie.Movie
+import com.msavik.domain.utility.Page
 import com.msavik.domain.utility.Resource
 import com.msavik.movie_database_app.R
 import com.msavik.movie_database_app.databinding.FragmentDetailsBinding
@@ -28,11 +29,10 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentDetailsBinding.bind(view)
 
-        val movieId = arguments?.let { bundle ->
-            bundle.getString("movieId")?.toInt()
-        }
+        val movieId = arguments?.getString("movieId")?.toInt()
+        val page = arguments?.getString("page")
 
-        viewModel.getMovieById(movieId ?: 111111)
+        viewModel.getMovieById(movieId ?: 0, page ?: "")
         initObserver()
     }
 
@@ -106,6 +106,12 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
             tvProductionCompanies.text = stringList.joinToString(", ")
             stringList.clear()
         }
+    }
+
+    private fun getCallerFragment(): String? {
+        val fm = requireFragmentManager()
+        val count = fm.backStackEntryCount
+        return fm.getBackStackEntryAt(count-1).name
     }
 
     companion object {
