@@ -51,4 +51,14 @@ interface MovieAPI {
         @Query("page")
         page: Int = 1
     ): Call<MovieList>
+
+    @GET("search/movie")
+    fun searchMovies(
+        @Query("query")
+        query: String,
+        @Query("api_key")
+        api_key: String = TMDB_API_KEY,
+        @Query("page")
+        page: Int = 1
+    ): Call<MovieList>
 }

@@ -15,6 +15,8 @@ interface MovieRepository {
 
     suspend fun getMovieById(id: Int): Movie
 
+    suspend fun searchMovies(query: String): List<Movie>
+
 
     /* DB calls */
 

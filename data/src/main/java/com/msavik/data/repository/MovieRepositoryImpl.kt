@@ -45,6 +45,13 @@ class MovieRepositoryImpl(private val database: MovieDatabase) : MovieRepository
         return response.checkAndParseResponse()
     }
 
+    override suspend fun searchMovies(query: String): List<Movie> {
+        val retrofitCall = RetrofitInstance.api.searchMovies(query)
+        val response = RetrofitUtils.execute(retrofitCall)
+        val movieList = response.checkAndParseResponse()
+        return movieList.results
+    }
+
 
     /* DB calls */
 
