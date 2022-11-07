@@ -12,7 +12,6 @@ import com.msavik.domain.model.movie.Movie
 import com.msavik.domain.utility.Resource
 import com.msavik.movie_database_app.R
 import com.msavik.movie_database_app.databinding.FragmentDetailsBinding
-import com.msavik.movie_database_app.ui.home.HomeFragment
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import java.text.DateFormat
 import java.text.NumberFormat
@@ -28,6 +27,10 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentDetailsBinding.bind(view)
 
+        binding.ivToolbarBack.setOnClickListener {
+            activity?.onBackPressed()
+        }
+
         val movieId = arguments?.getString("movieId")?.toInt()
         val page = arguments?.getString("page")
 
@@ -39,21 +42,21 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
         viewModel.movieLiveData.observe(viewLifecycleOwner) { response ->
             when(response) {
                 is Resource.Loading -> {
-                    Log.d(HomeFragment.TAG, "Loading...")
+                    Log.d(TAG, "Loading...")
                 }
                 is Resource.Success -> {
                     response.data?.let { movie ->
-                        Log.d(HomeFragment.TAG, "Success!")
+                        Log.d(TAG, "Success!")
                         this.movie = movie
 
-                        Log.d(HomeFragment.TAG, "LOGOBSERVER: ${this.movie}")
+                        Log.d(TAG, "LOGOBSERVER: ${this.movie}")
 
                         initView()
                     }
                 }
                 is Resource.Error -> {
                     response.message?.let { message ->
-                        Log.e(HomeFragment.TAG, "Error: $message")
+                        Log.e(TAG, "Error: $message")
                         Snackbar.make(requireView(), "Error: $message", Snackbar.LENGTH_LONG)
                     }
                 }
@@ -109,12 +112,6 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
             tvProductionCompanies.text = stringList.joinToString(", ")
             stringList.clear()
         }
-    }
-
-    private fun getCallerFragment(): String? {
-        val fm = requireFragmentManager()
-        val count = fm.backStackEntryCount
-        return fm.getBackStackEntryAt(count-1).name
     }
 
     companion object {

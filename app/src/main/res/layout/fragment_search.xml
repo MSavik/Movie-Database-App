@@ -17,13 +17,35 @@
             android:layout_height="wrap_content"
             android:background="@color/vampire_black">
 
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="0dp"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:background="@color/raisin_black"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark"
+                app:popupTheme="@style/Theme.AppCompat.Light"
+                android:elevation="4dp">
+
+                <TextView
+                    android:id="@+id/tvToolbarTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/movies"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_xxlarge"
+                    android:textStyle="bold"/>
+            </androidx.appcompat.widget.Toolbar>
+
             <androidx.appcompat.widget.SearchView
                 style="@style/SearchViewStyle"
                 android:theme="@style/SearchViewStyle"
                 android:id="@+id/svSearch"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/toolbar"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toTopOf="@id/rvSearch"
