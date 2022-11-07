@@ -2,8 +2,10 @@ package com.msavik.movie_database_app.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI
 import com.msavik.movie_database_app.R
 import com.msavik.movie_database_app.databinding.ActivityMainBinding
 import com.msavik.movie_database_app.ui.home.movie.MovieViewModel
@@ -30,6 +32,16 @@ class MainActivity : AppCompatActivity() {
             .findFragmentById(R.id.fragment) as NavHostFragment
 
         navController = navHostFragment.navController
+
+        NavigationUI.setupWithNavController(binding.bnvMain, navController)
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            if (destination.id == R.id.detailsFragment) {
+                binding.bnvMain.visibility = View.GONE
+            } else {
+                binding.bnvMain.visibility = View.VISIBLE
+            }
+        }
     }
 
     private fun clearDatabase() {

@@ -1,11 +1,13 @@
 package com.msavik.movie_database_app.ui.details
 
+import android.opengl.Visibility
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.msavik.data.utility.BaseUrl
 import com.msavik.domain.model.movie.Movie

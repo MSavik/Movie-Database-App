@@ -4,8 +4,11 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/xmmar/AndroidStudioProjects/Movie-Database-App/app/src/main/res/drawable/background_search_view.xml" value="0.123" />
+        <entry key="..\:/Users/xmmar/AndroidStudioProjects/Movie-Database-App/app/src/main/res/drawable/bottom_nav_selector.xml" value="0.1425" />
         <entry key="..\:/Users/xmmar/AndroidStudioProjects/Movie-Database-App/app/src/main/res/drawable/ic_arrow_right.xml" value="0.1425" />
         <entry key="..\:/Users/xmmar/AndroidStudioProjects/Movie-Database-App/app/src/main/res/drawable/ic_close.xml" value="0.1425" />
+        <entry key="..\:/Users/xmmar/AndroidStudioProjects/Movie-Database-App/app/src/main/res/drawable/ic_favorite.xml" value="0.1425" />
+        <entry key="..\:/Users/xmmar/AndroidStudioProjects/Movie-Database-App/app/src/main/res/drawable/ic_home.xml" value="0.1425" />
         <entry key="..\:/Users/xmmar/AndroidStudioProjects/Movie-Database-App/app/src/main/res/drawable/ic_search.xml" value="0.1425" />
         <entry key="..\:/Users/xmmar/AndroidStudioProjects/Movie-Database-App/app/src/main/res/layout/activity_home.xml" value="0.23958333333333334" />
         <entry key="..\:/Users/xmmar/AndroidStudioProjects/Movie-Database-App/app/src/main/res/layout/activity_main.xml" value="0.22826086956521738" />
@@ -15,6 +18,7 @@
         <entry key="..\:/Users/xmmar/AndroidStudioProjects/Movie-Database-App/app/src/main/res/layout/fragment_top_rated.xml" value="0.23958333333333334" />
         <entry key="..\:/Users/xmmar/AndroidStudioProjects/Movie-Database-App/app/src/main/res/layout/fragment_upcoming.xml" value="0.23958333333333334" />
         <entry key="..\:/Users/xmmar/AndroidStudioProjects/Movie-Database-App/app/src/main/res/layout/item_movie_details.xml" value="0.23958333333333334" />
+        <entry key="..\:/Users/xmmar/AndroidStudioProjects/Movie-Database-App/app/src/main/res/menu/bottom_nav_menu.xml" value="0.253125" />
       </map>
     </option>
   </component>
