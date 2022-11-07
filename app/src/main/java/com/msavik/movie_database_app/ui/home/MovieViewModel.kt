@@ -1,4 +1,4 @@
-package com.msavik.movie_database_app.ui.home.movie
+package com.msavik.movie_database_app.ui.home
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData

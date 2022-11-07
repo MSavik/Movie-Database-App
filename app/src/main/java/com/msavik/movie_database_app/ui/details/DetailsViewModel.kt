@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.msavik.domain.model.movie.Movie
 import com.msavik.domain.usecases.GetPopularMovieByIdUseCase
+import com.msavik.domain.usecases.GetSearchMovieByIdUseCase
 import com.msavik.domain.usecases.GetTopRatedMovieByIdUseCase
 import com.msavik.domain.usecases.GetUpcomingMovieByIdUseCase
 import com.msavik.domain.utility.Page
@@ -16,7 +17,8 @@ import kotlinx.coroutines.launch
 class DetailsViewModel(
     private val getPopularMovieByIdUseCase: GetPopularMovieByIdUseCase,
     private val getTopRatedMovieByIdUseCase: GetTopRatedMovieByIdUseCase,
-    private val getUpcomingMovieByIdUseCase: GetUpcomingMovieByIdUseCase
+    private val getUpcomingMovieByIdUseCase: GetUpcomingMovieByIdUseCase,
+    private val getSearchMovieByIdUseCase: GetSearchMovieByIdUseCase
 ) : ViewModel() {
 
     val movieLiveData: MutableLiveData<Resource<Movie>> = MutableLiveData()
@@ -34,6 +36,9 @@ class DetailsViewModel(
                 }
                 Page.UPCOMING.name -> {
                     getUpcomingMovieByIdUseCase.execute(id)
+                }
+                Page.SEARCH.name -> {
+                    getSearchMovieByIdUseCase.execute(id)
                 }
                 else -> {
                     throw Exception()

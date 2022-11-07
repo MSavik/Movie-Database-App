@@ -1,4 +1,4 @@
-package com.msavik.movie_database_app.ui.home.movie.page_fragments
+package com.msavik.movie_database_app.ui.home.page_fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,8 +7,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.msavik.movie_database_app.R
 import com.msavik.movie_database_app.databinding.FragmentUpcomingBinding
-import com.msavik.movie_database_app.ui.home.movie.HomeFragment
-import com.msavik.movie_database_app.ui.home.movie.MovieViewModel
+import com.msavik.movie_database_app.ui.home.HomeFragment
+import com.msavik.movie_database_app.ui.home.MovieViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class UpcomingFragment : Fragment(R.layout.fragment_upcoming) {

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.home.movie.page_fragments.PopularFragment">
+    tools:context=".ui.home.page_fragments.PopularFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvPopular"
