@@ -14,4 +14,6 @@ val domainModule = module {
     factory { DeletePopularMovieListUseCase(get()) }
     factory { DeleteTopRatedMovieListUseCase(get()) }
     factory { DeleteUpcomingMovieListUseCase(get()) }
+    factory { SearchMoviesUseCase(get()) }
+    factory { GetSearchMovieByIdUseCase(get()) }
 }
