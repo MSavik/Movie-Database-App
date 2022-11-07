@@ -1,4 +1,4 @@
-package com.msavik.movie_database_app.ui.home.movie
+package com.msavik.movie_database_app.ui.home
 
 import android.os.Bundle
 import android.util.Log
@@ -20,14 +20,14 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private lateinit var binding: FragmentHomeBinding
     private val viewModel: MovieViewModel by sharedViewModel()
-    val popularMovieAdapter = MovieAdapter(Page.POPULAR) { movieId, _ ->
-        onItemClick(movieId, Page.POPULAR)
+    val popularMovieAdapter = MovieAdapter { movieId ->
+        onItemClick(movieId)
     }
-    val topRatedMovieAdapter = MovieAdapter(Page.TOP_RATED) { movieId, _ ->
-        onItemClick(movieId, Page.TOP_RATED)
+    val topRatedMovieAdapter = MovieAdapter { movieId ->
+        onItemClick(movieId)
     }
-    val upcomingMovieAdapter = MovieAdapter(Page.UPCOMING) { movieId, _ ->
-        onItemClick(movieId, Page.UPCOMING)
+    val upcomingMovieAdapter = MovieAdapter { movieId ->
+        onItemClick(movieId)
     }
     var popularMoviesList: List<Movie> = emptyList()
     var topRatedMoviesList: List<Movie> = emptyList()
@@ -199,10 +199,18 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         })
     }
 
-    private fun onItemClick(movieId: Int, page: Page) {
+    private fun onItemClick(movieId: Int) {
+
+        val page = when(binding.tlHome.selectedTabPosition) {
+            0 -> Page.POPULAR.name
+            1 -> Page.TOP_RATED.name
+            2 -> Page.UPCOMING.name
+            else -> Page.POPULAR.name
+        }
+
         val bundle = bundleOf(
             "movieId" to movieId.toString(),
-            "page" to page.name
+            "page" to page
         )
         findNavController().navigate(R.id.detailsFragment, bundle)
     }

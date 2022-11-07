@@ -1,21 +1,18 @@
 package com.msavik.movie_database_app.ui.details
 
-import android.opengl.Visibility
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.msavik.data.utility.BaseUrl
 import com.msavik.domain.model.movie.Movie
-import com.msavik.domain.utility.Page
 import com.msavik.domain.utility.Resource
 import com.msavik.movie_database_app.R
 import com.msavik.movie_database_app.databinding.FragmentDetailsBinding
-import com.msavik.movie_database_app.ui.home.movie.HomeFragment
+import com.msavik.movie_database_app.ui.home.HomeFragment
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import java.text.DateFormat
 import java.text.NumberFormat
@@ -34,8 +31,8 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
         val movieId = arguments?.getString("movieId")?.toInt()
         val page = arguments?.getString("page")
 
-        viewModel.getMovieById(movieId ?: 0, page ?: "")
         initObserver()
+        viewModel.getMovieById(movieId ?: 0, page ?: "")
     }
 
     private fun initObserver() {
@@ -76,9 +73,13 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
             tvTitle.text = movie.title
             tvOverview.text = movie.overview
             tvVoteAverage.text = String.format("%.1f", movie.vote_average)
-            tvReleaseDate.text = DateFormat.getDateInstance().format(
-                SimpleDateFormat("yyyy-mm-dd", Locale.ENGLISH).parse(movie.release_date) ?: ""
-            )
+            tvReleaseDate.text = if (movie.release_date.isNotEmpty()) {
+                DateFormat.getDateInstance().format(
+                    SimpleDateFormat("yyyy-mm-dd", Locale.ENGLISH).parse(movie.release_date) ?: ""
+                )
+            } else {
+                ""
+            }
 
             movie.genres?.forEach {
                 stringList.add(it.name)
