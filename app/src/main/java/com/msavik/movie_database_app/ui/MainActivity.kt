@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
 
         if (isFirstStart) {
             isFirstStart = false
-            clearDatabase()
+//            clearDatabase()
         }
 
         val navHostFragment = supportFragmentManager

@@ -4,5 +4,5 @@
     tools:showIn="navigation_view">
     <item android:title="@string/home" android:icon="@drawable/ic_home" android:id="@+id/homeFragment"/>
     <item android:title="@string/search" android:icon="@drawable/ic_search" android:id="@+id/searchFragment"/>
-    <item android:title="@string/favorites" android:icon="@drawable/ic_favorite"/>
+    <item android:title="@string/favorites" android:icon="@drawable/ic_favorite" android:id="@+id/favoriteFragment"/>
 </menu>
