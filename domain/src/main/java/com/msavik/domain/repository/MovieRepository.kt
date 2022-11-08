@@ -52,4 +52,13 @@ interface MovieRepository {
     suspend fun deleteUpcomingMovieDatabase(movie: Movie)
 
     suspend fun deleteAllUpcomingMoviesDatabase()
+
+    /* Favorite */
+    suspend fun upsertFavoriteMovieDatabase(movie: Movie)
+
+    fun getFavoriteMovieByIdDatabase(id: Int): Movie
+
+    fun getFavoriteMovieListDatabase(): List<Movie>
+
+    suspend fun deleteFavoriteMovieDatabase(movie: Movie)
 }

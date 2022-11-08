@@ -87,6 +87,6 @@ class MovieViewModel(
     }
 
     companion object {
-        val TAG: String = this::class.java.simpleName
+        val TAG: String = this::class.java.declaringClass.simpleName
     }
 }

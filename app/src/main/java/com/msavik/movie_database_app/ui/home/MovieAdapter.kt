@@ -50,7 +50,7 @@ class MovieAdapter(val onItemClick: (Int) -> Unit) : ListAdapter<Movie, MovieAda
                 } else {
                     ""
                 }
-                tvRating.text = "${movie.vote_average} / 10"
+                tvRating.text = String.format("%.1f", movie.vote_average) + " / 10"
             }
         }
     }

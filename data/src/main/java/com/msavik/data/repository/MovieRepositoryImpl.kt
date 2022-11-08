@@ -2,6 +2,7 @@ package com.msavik.data.repository
 
 import com.msavik.data.api.RetrofitInstance
 import com.msavik.data.db.MovieDatabase
+import com.msavik.data.entity.mapper.FavoriteMovieMapper
 import com.msavik.data.entity.mapper.PopularMovieMapper
 import com.msavik.data.entity.mapper.TopRatedMovieMapper
 import com.msavik.data.entity.mapper.UpcomingMovieMapper
@@ -15,6 +16,7 @@ class MovieRepositoryImpl(private val database: MovieDatabase) : MovieRepository
     private val popularMovieMapper = PopularMovieMapper()
     private val topRatedMovieMapper = TopRatedMovieMapper()
     private val upcomingMovieMapper = UpcomingMovieMapper()
+    private val favoriteMovieMapper = FavoriteMovieMapper()
 
     /* API calls */
 
@@ -132,4 +134,26 @@ class MovieRepositoryImpl(private val database: MovieDatabase) : MovieRepository
     override suspend fun deleteAllUpcomingMoviesDatabase() {
         database.getMovieDao().deleteAllUpcomingMovies()
     }
+
+    /* Favorite */
+    override suspend fun upsertFavoriteMovieDatabase(movie: Movie) =
+        database.getMovieDao().upsertFavoriteMovie(favoriteMovieMapper.mapToEntity(movie))
+
+    override fun getFavoriteMovieByIdDatabase(id: Int): Movie {
+        val movieEntity = database.getMovieDao().getFavoriteMovieById(id)
+        return favoriteMovieMapper.mapFromEntity(movieEntity)
+    }
+
+    override fun getFavoriteMovieListDatabase(): List<Movie> {
+        val movieEntityList = database.getMovieDao().getAllFavoriteMovies()
+        val movieList = arrayListOf<Movie>()
+
+        movieEntityList.forEach { movieEntity ->
+            movieList.add(favoriteMovieMapper.mapFromEntity(movieEntity))
+        }
+        return movieList
+    }
+
+    override suspend fun deleteFavoriteMovieDatabase(movie: Movie) =
+        database.getMovieDao().deleteFavoriteMovie(favoriteMovieMapper.mapToEntity(movie))
 }

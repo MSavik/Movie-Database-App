@@ -1,6 +1,7 @@
 package com.msavik.data.db
 
 import androidx.room.*
+import com.msavik.data.entity.FavoriteMovieEntity
 import com.msavik.data.entity.PopularMovieEntity
 import com.msavik.data.entity.TopRatedMovieEntity
 import com.msavik.data.entity.UpcomingMovieEntity
@@ -56,4 +57,17 @@ interface MovieDao {
 
     @Query("DELETE FROM upcoming_movie")
     suspend fun deleteAllUpcomingMovies()
+
+    /* Favorite */
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun upsertFavoriteMovie(movie: FavoriteMovieEntity)
+
+    @Query("SELECT * FROM favorite_movie WHERE id LIKE :id")
+    fun getFavoriteMovieById(id: Int): FavoriteMovieEntity
+
+    @Query("SELECT * FROM favorite_movie ORDER BY id")
+    fun getAllFavoriteMovies(): List<FavoriteMovieEntity>
+
+    @Delete
+    suspend fun deleteFavoriteMovie(movie: FavoriteMovieEntity)
 }

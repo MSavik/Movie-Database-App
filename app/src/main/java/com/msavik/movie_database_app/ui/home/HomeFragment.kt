@@ -216,6 +216,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     companion object {
-        val TAG: String = this::class.java.simpleName
+        val TAG: String = this::class.java.declaringClass.simpleName
     }
 }
