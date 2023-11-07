@@ -15,8 +15,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
 
-    private val movieViewModel: MovieViewModel by viewModel()
-
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
 
@@ -27,11 +25,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         this.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
-
-        if (isFirstStart) {
-            isFirstStart = false
-//            clearDatabase()
-        }
 
         val navHostFragment = supportFragmentManager
             .findFragmentById(R.id.fragment) as NavHostFragment
@@ -47,15 +40,5 @@ class MainActivity : AppCompatActivity() {
                 binding.bnvMain.visibility = View.VISIBLE
             }
         }
-    }
-
-    private fun clearDatabase() {
-        movieViewModel.deletePopularMovieList()
-        movieViewModel.deleteTopRatedMovieList()
-        movieViewModel.deleteUpcomingMovieList()
-    }
-
-    companion object {
-        private var isFirstStart = true
     }
 }

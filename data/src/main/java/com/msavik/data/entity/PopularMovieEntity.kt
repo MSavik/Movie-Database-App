@@ -9,16 +9,16 @@ import com.msavik.domain.model.movie.*
 data class PopularMovieEntity(
 
     @ColumnInfo(name = "adult")
-    val adult: Boolean,
+    val adult: Boolean?,
 
     @ColumnInfo(name = "backdrop_path")
-    val backdrop_path: String,
+    val backdrop_path: String?,
 
     @ColumnInfo(name = "belongs_to_collection")
     val belongs_to_collection: MovieCollection?,
 
     @ColumnInfo(name = "budget")
-    val budget: Int,
+    val budget: Int?,
 
     @ColumnInfo(name = "genres")
     val genres: List<MovieGenre>?,
@@ -34,19 +34,19 @@ data class PopularMovieEntity(
     val imdb_id: String?,
 
     @ColumnInfo(name = "original_language")
-    val original_language: String,
+    val original_language: String?,
 
     @ColumnInfo(name = "original_title")
-    val original_title: String,
+    val original_title: String?,
 
     @ColumnInfo(name = "overview")
-    val overview: String,
+    val overview: String?,
 
     @ColumnInfo(name = "popularity")
-    val popularity: Double,
+    val popularity: Double?,
 
     @ColumnInfo(name = "poster_path")
-    val poster_path: String,
+    val poster_path: String?,
 
     @ColumnInfo(name = "production_companies")
     val production_companies: List<ProductionCompany>?,
@@ -55,7 +55,7 @@ data class PopularMovieEntity(
     val production_countries: List<ProductionCountry>?,
 
     @ColumnInfo(name = "release_date")
-    val release_date: String,
+    val release_date: String?,
 
     @ColumnInfo(name = "revenue")
     val revenue: Int?,
@@ -73,14 +73,14 @@ data class PopularMovieEntity(
     val tagline: String?,
 
     @ColumnInfo(name = "title")
-    val title: String,
+    val title: String?,
 
     @ColumnInfo(name = "video")
-    val video: Boolean,
+    val video: Boolean?,
 
     @ColumnInfo(name = "vote_average")
-    val vote_average: Double,
+    val vote_average: Double?,
 
     @ColumnInfo(name = "vote_count")
-    val vote_count: Int
+    val vote_count: Int?
 )

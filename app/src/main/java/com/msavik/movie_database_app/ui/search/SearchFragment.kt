@@ -33,7 +33,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
         initObserver()
         binding.srlSearch.setOnRefreshListener {
-            viewModel.searchMovies("")
+            viewModel.searchMovies(binding.svSearch.query.toString())
         }
         initView()
         setMovieFilter()

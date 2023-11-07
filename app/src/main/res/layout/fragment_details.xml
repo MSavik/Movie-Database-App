@@ -73,10 +73,11 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="@id/ivMovie"
             android:layout_marginStart="@dimen/margin_normal"
+            android:layout_marginEnd="@dimen/margin_normal"
             android:textSize="@dimen/text_size_normal"
             android:textStyle="bold"
             android:textColor="@color/white"
-            android:maxLines="6"
+            android:maxLines="9"
             android:ellipsize="end"
             tools:text="Overview..."/>
 

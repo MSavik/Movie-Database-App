@@ -43,9 +43,9 @@ class MovieAdapter(val onItemClick: (Int) -> Unit) : ListAdapter<Movie, MovieAda
                     .into(ivMovie)
 
                 tvTitle.text = movie.title
-                tvReleaseDate.text = if (movie.release_date.isNotEmpty()) {
+                tvReleaseDate.text = if (movie.release_date?.isNotEmpty() == true) {
                     DateFormat.getDateInstance().format(
-                        SimpleDateFormat("yyyy-mm-dd", Locale.ENGLISH).parse(movie.release_date) ?: ""
+                        SimpleDateFormat("yyyy-mm-dd", Locale.ENGLISH).parse(movie.release_date ?: "") ?: ""
                     )
                 } else {
                     ""

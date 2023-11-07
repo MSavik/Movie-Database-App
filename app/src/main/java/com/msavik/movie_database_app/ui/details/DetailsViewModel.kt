@@ -64,6 +64,7 @@ class DetailsViewModel(
             val response = getFavoriteMoviesListUseCase.execute()
             favoriteMovieListLiveData.postValue(Resource.Success(response))
         } catch (e: Exception) {
+            Log.e(TAG, "getFavoriteMoviesList: $e")
             favoriteMovieListLiveData.postValue(Resource.Error(e.message ?: e.toString()))
         }
     }
@@ -72,8 +73,11 @@ class DetailsViewModel(
 
         try {
             saveFavoriteMovieUseCase.execute(movie)
+            val response = getFavoriteMoviesListUseCase.execute()
+            favoriteMovieListLiveData.postValue(Resource.Success(response))
         } catch (e: Exception) {
             Log.e(TAG, "saveFavoriteMovie: $e")
+            favoriteMovieListLiveData.postValue(Resource.Error(e.message ?: e.toString()))
         }
     }
 
@@ -81,8 +85,11 @@ class DetailsViewModel(
 
         try {
             deleteFavoriteMovieUseCase.execute(movie)
+            val response = getFavoriteMoviesListUseCase.execute()
+            favoriteMovieListLiveData.postValue(Resource.Success(response))
         } catch (e: Exception) {
             Log.e(TAG, "deleteFavoriteMovie: $e")
+            favoriteMovieListLiveData.postValue(Resource.Error(e.message ?: e.toString()))
         }
     }
 

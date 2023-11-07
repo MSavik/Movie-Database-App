@@ -90,7 +90,7 @@ class FavoriteFragment : Fragment(R.layout.fragment_favorite) {
                 val filteredMovies = ArrayList<Movie>()
 
                 favoriteMovieList.forEach {
-                    if (it.title.lowercase().contains(newText?.lowercase() ?: "")) {
+                    if (it.title?.lowercase()?.contains(newText?.lowercase() ?: "") == true) {
                         filteredMovies.add(it)
                     }
                 }

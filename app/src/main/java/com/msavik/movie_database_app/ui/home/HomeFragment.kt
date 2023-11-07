@@ -187,7 +187,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 }
 
                 movieList.forEach {
-                    if (it.title.lowercase().contains(newText?.lowercase() ?: "")) {
+                    if (it.title?.lowercase()?.contains(newText?.lowercase() ?: "") == true) {
                         filteredMovies.add(it)
                     }
                 }
