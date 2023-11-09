@@ -9,8 +9,8 @@ import org.koin.dsl.module
 
 val appModule = module {
 
-    viewModel { MovieViewModel(get(), get(), get(), get(), get(), get()) }
+    viewModel { MovieViewModel(get(), get(), get(), get(), get(), get(), get(), get(), get()) }
     viewModel { DetailsViewModel(get(), get(), get(), get(), get(), get(), get(), get()) }
     viewModel { SearchViewModel(get()) }
-    viewModel { FavoriteViewModel(get()) }
+    viewModel { FavoriteViewModel(get(), get()) }
 }

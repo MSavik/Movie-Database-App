@@ -15,9 +15,10 @@
         <entry key="..\:/Users/xmmar/AndroidStudioProjects/Movie-Database-App/app/src/main/res/drawable/ic_search.xml" value="0.1425" />
         <entry key="..\:/Users/xmmar/AndroidStudioProjects/Movie-Database-App/app/src/main/res/layout/activity_home.xml" value="0.23958333333333334" />
         <entry key="..\:/Users/xmmar/AndroidStudioProjects/Movie-Database-App/app/src/main/res/layout/activity_main.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/xmmar/AndroidStudioProjects/Movie-Database-App/app/src/main/res/layout/dialog_clear_favorite_movies.xml" value="0.2" />
         <entry key="..\:/Users/xmmar/AndroidStudioProjects/Movie-Database-App/app/src/main/res/layout/fragment_details.xml" value="0.24818840579710144" />
         <entry key="..\:/Users/xmmar/AndroidStudioProjects/Movie-Database-App/app/src/main/res/layout/fragment_favorite.xml" value="0.24818840579710144" />
-        <entry key="..\:/Users/xmmar/AndroidStudioProjects/Movie-Database-App/app/src/main/res/layout/fragment_home.xml" value="0.11302083333333333" />
+        <entry key="..\:/Users/xmmar/AndroidStudioProjects/Movie-Database-App/app/src/main/res/layout/fragment_home.xml" value="0.264" />
         <entry key="..\:/Users/xmmar/AndroidStudioProjects/Movie-Database-App/app/src/main/res/layout/fragment_popular.xml" value="0.23958333333333334" />
         <entry key="..\:/Users/xmmar/AndroidStudioProjects/Movie-Database-App/app/src/main/res/layout/fragment_search.xml" value="0.24818840579710144" />
         <entry key="..\:/Users/xmmar/AndroidStudioProjects/Movie-Database-App/app/src/main/res/layout/fragment_top_rated.xml" value="0.23958333333333334" />

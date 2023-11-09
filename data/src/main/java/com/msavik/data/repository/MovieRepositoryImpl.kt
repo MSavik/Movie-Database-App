@@ -156,4 +156,8 @@ class MovieRepositoryImpl(private val database: MovieDatabase) : MovieRepository
 
     override suspend fun deleteFavoriteMovieDatabase(movie: Movie) =
         database.getMovieDao().deleteFavoriteMovie(favoriteMovieMapper.mapToEntity(movie))
+
+    override suspend fun deleteAllFavoriteMoviesDatabase() {
+        database.getMovieDao().deleteAllFavoriteMovies()
+    }
 }

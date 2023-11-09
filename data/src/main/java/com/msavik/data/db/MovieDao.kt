@@ -70,4 +70,7 @@ interface MovieDao {
 
     @Delete
     suspend fun deleteFavoriteMovie(movie: FavoriteMovieEntity)
+
+    @Query("DELETE FROM favorite_movie")
+    suspend fun deleteAllFavoriteMovies()
 }

@@ -16,7 +16,10 @@ class MovieViewModel(
     private val getUpcomingMoviesListUseCase: GetUpcomingMoviesListUseCase,
     private val deletePopularMovieListUseCase: DeletePopularMovieListUseCase,
     private val deleteTopRatedMovieListUseCase: DeleteTopRatedMovieListUseCase,
-    private val deleteUpcomingMovieListUseCase: DeleteUpcomingMovieListUseCase
+    private val deleteUpcomingMovieListUseCase: DeleteUpcomingMovieListUseCase,
+    private val updatePopularMoviesListUseCase: UpdatePopularMoviesListUseCase,
+    private val updateTopRatedMoviesListUseCase: UpdateTopRatedMoviesListUseCase,
+    private val updateUpcomingMoviesListUseCase: UpdateUpcomingMoviesListUseCase
 ) : ViewModel() {
 
     val popularMovieListLiveData: MutableLiveData<Resource<List<Movie>>> = MutableLiveData()
@@ -60,7 +63,6 @@ class MovieViewModel(
     }
 
     fun deletePopularMovieList() = viewModelScope.launch(Dispatchers.IO) {
-
         try {
             deletePopularMovieListUseCase.execute()
         } catch (e: Exception) {
@@ -69,7 +71,6 @@ class MovieViewModel(
     }
 
     fun deleteTopRatedMovieList() = viewModelScope.launch(Dispatchers.IO) {
-
         try {
             deleteTopRatedMovieListUseCase.execute()
         } catch (e: Exception) {
@@ -78,11 +79,43 @@ class MovieViewModel(
     }
 
     fun deleteUpcomingMovieList() = viewModelScope.launch(Dispatchers.IO) {
-
         try {
             deleteUpcomingMovieListUseCase.execute()
         } catch (e: Exception) {
             Log.e(TAG, "deleteUpcomingMovieList: $e")
+        }
+    }
+
+    fun updatePopularMoviesList() = viewModelScope.launch(Dispatchers.IO) {
+        try {
+            updatePopularMoviesListUseCase.execute()
+            val response = getPopularMoviesListUseCase.execute()
+            popularMovieListLiveData.postValue(Resource.Success(response))
+        } catch (e: Exception) {
+            Log.e(TAG, "updatePopularMoviesList")
+            popularMovieListLiveData.postValue(Resource.Error(e.message ?: e.toString()))
+        }
+    }
+
+    fun updateTopRatedMoviesList() = viewModelScope.launch(Dispatchers.IO) {
+        try {
+            updateTopRatedMoviesListUseCase.execute()
+            val response = getTopRatedMoviesListUseCase.execute()
+            topRatedMovieListLiveData.postValue(Resource.Success(response))
+        } catch (e: Exception) {
+            Log.e(TAG, "updatePopularMoviesList")
+            topRatedMovieListLiveData.postValue(Resource.Error(e.message ?: e.toString()))
+        }
+    }
+
+    fun updateUpcomingMoviesList() = viewModelScope.launch(Dispatchers.IO) {
+        try {
+            updateUpcomingMoviesListUseCase.execute()
+            val response = getUpcomingMoviesListUseCase.execute()
+            upcomingMovieListLiveData.postValue(Resource.Success(response))
+        } catch (e: Exception) {
+            Log.e(TAG, "updatePopularMoviesList")
+            upcomingMovieListLiveData.postValue(Resource.Error(e.message ?: e.toString()))
         }
     }
 

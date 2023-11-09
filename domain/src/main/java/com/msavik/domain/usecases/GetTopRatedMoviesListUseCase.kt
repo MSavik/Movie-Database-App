@@ -8,9 +8,7 @@ class GetTopRatedMoviesListUseCase(
 ) : BaseUseCase<Unit?, List<Movie>>() {
     override suspend fun execute(params: Unit?): List<Movie> {
         val cachedMovieList = repository.getTopRatedMovieListDatabase()
-        return if (cachedMovieList.isNotEmpty()) {
-            cachedMovieList
-        } else {
+        return cachedMovieList.ifEmpty {
             val response = repository.getTopRatedMoviesList()
             for (movie in response) {
                 repository.upsertTopRatedMovieDatabase(movie)

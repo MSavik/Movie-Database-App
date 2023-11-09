@@ -61,4 +61,6 @@ interface MovieRepository {
     fun getFavoriteMovieListDatabase(): List<Movie>
 
     suspend fun deleteFavoriteMovieDatabase(movie: Movie)
+
+    suspend fun deleteAllFavoriteMoviesDatabase()
 }

@@ -1,9 +1,13 @@
 package com.msavik.movie_database_app.ui.favorite
 
+import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
+import android.view.Window
 import androidx.appcompat.widget.SearchView
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
@@ -14,6 +18,7 @@ import com.msavik.domain.model.movie.Movie
 import com.msavik.domain.utility.Page
 import com.msavik.domain.utility.Resource
 import com.msavik.movie_database_app.R
+import com.msavik.movie_database_app.databinding.DialogClearFavoriteMoviesBinding
 import com.msavik.movie_database_app.databinding.FragmentFavoriteBinding
 import com.msavik.movie_database_app.ui.home.MovieAdapter
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -21,6 +26,7 @@ import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 class FavoriteFragment : Fragment(R.layout.fragment_favorite) {
 
     private lateinit var binding: FragmentFavoriteBinding
+    private lateinit var dialogBinding: DialogClearFavoriteMoviesBinding
     private val viewModel: FavoriteViewModel by sharedViewModel()
     private val favoriteMovieAdapter = MovieAdapter { movieId ->
         onItemClick(movieId)
@@ -69,6 +75,26 @@ class FavoriteFragment : Fragment(R.layout.fragment_favorite) {
     }
 
     private fun initView() {
+        binding.btClear.setOnClickListener {
+            dialogBinding = DialogClearFavoriteMoviesBinding.inflate(layoutInflater)
+            val dialog = Dialog(requireContext())
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            dialog.setCancelable(false)
+            dialog.setContentView(dialogBinding.root)
+            dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+            dialogBinding.btNo.setOnClickListener {
+                dialog.dismiss()
+            }
+
+            dialogBinding.btYes.setOnClickListener {
+                viewModel.deleteAllFavoriteMovies()
+                dialog.dismiss()
+            }
+
+            dialog.show()
+        }
+
         binding.rvFavorite.apply {
             layoutManager = LinearLayoutManager(
                 requireContext(),

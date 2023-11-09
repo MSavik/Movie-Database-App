@@ -132,9 +132,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         binding.apply {
             srlHome.setOnRefreshListener {
                 when(tlHome.selectedTabPosition) {
-                    0 -> { viewModel.getPopularMoviesList() }
-                    1 -> { viewModel.getTopRatedMoviesList() }
-                    2 -> { viewModel.getUpcomingMoviesList() }
+                    0 -> { viewModel.updatePopularMoviesList() }
+                    1 -> { viewModel.updateTopRatedMoviesList() }
+                    2 -> { viewModel.updateUpcomingMoviesList() }
                 }
             }
         }

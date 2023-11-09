@@ -8,6 +8,7 @@ import com.msavik.domain.model.movie.Movie
 import com.msavik.domain.usecases.*
 import com.msavik.domain.utility.Page
 import com.msavik.domain.utility.Resource
+import com.msavik.movie_database_app.ui.home.MovieViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
