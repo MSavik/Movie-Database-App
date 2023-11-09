@@ -1,6 +1,6 @@
 package com.msavik.domain.utility
 
-enum class Page(name: String) {
+enum class Page(@Suppress("UNUSED_PARAMETER") name: String) {
     POPULAR("popular"),
     TOP_RATED("top_rated"),
     UPCOMING("upcoming"),

@@ -67,7 +67,7 @@ class FavoriteFragment : Fragment(R.layout.fragment_favorite) {
                     response.message?.let { message ->
                         binding.srlFavorite.isRefreshing = false
                         Log.e(TAG, "Error: $message")
-                        Snackbar.make(requireView(), "Error: $message", Snackbar.LENGTH_LONG)
+                        Snackbar.make(requireView(), "Error: $message", Snackbar.LENGTH_LONG).show()
                     }
                 }
             }

@@ -62,7 +62,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                     response.message?.let { message ->
                         binding.srlSearch.isRefreshing = false
                         Log.e(TAG, "Error: $message")
-                        Snackbar.make(requireView(), "Error: $message", Snackbar.LENGTH_LONG)
+                        Snackbar.make(requireView(), "Error: $message", Snackbar.LENGTH_LONG).show()
                     }
                 }
             }

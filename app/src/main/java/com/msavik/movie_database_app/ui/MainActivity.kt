@@ -10,8 +10,6 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.msavik.movie_database_app.R
 import com.msavik.movie_database_app.databinding.ActivityMainBinding
-import com.msavik.movie_database_app.ui.home.MovieViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
 

@@ -119,27 +119,14 @@
             android:background="@color/raisin_black"/>
 
         <TextView
-            android:id="@+id/tvDetails"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/vSeparator"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="@dimen/margin_xlarge"
-            android:layout_marginStart="@dimen/margin_xlarge"
-            android:textSize="@dimen/text_size_xlarge"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:text="Details"/>
-
-        <TextView
             android:id="@+id/tvReleaseDateLabel"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/tvDetails"
-            app:layout_constraintStart_toStartOf="@id/tvDetails"
+            app:layout_constraintTop_toBottomOf="@id/vSeparator"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="@dimen/margin_xlarge"
-            android:layout_marginTop="@dimen/margin_xxlarge"
+            android:layout_marginTop="@dimen/margin_xlarge"
+            android:layout_marginStart="@dimen/margin_xlarge"
             android:textSize="@dimen/text_size_normal"
             android:textColor="@color/white"
             android:textStyle="bold"
@@ -167,7 +154,7 @@
             app:layout_constraintStart_toStartOf="@id/tvReleaseDate"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="@dimen/margin_xlarge"
-            android:layout_marginTop="@dimen/margin_xxlarge"
+            android:layout_marginTop="@dimen/margin_xlarge"
             android:textSize="@dimen/text_size_normal"
             android:textColor="@color/white"
             android:textStyle="bold"

@@ -63,7 +63,7 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
                 is Resource.Error -> {
                     response.message?.let { message ->
                         Log.e(TAG, "Error: $message")
-                        Snackbar.make(requireView(), "Error: $message", Snackbar.LENGTH_LONG)
+                        Snackbar.make(requireView(), "Error: $message", Snackbar.LENGTH_LONG).show()
                     }
                 }
             }
@@ -93,7 +93,7 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
                 is Resource.Error -> {
                     response.message?.let { message ->
                         Log.e(TAG, "Error: $message")
-                        Snackbar.make(requireView(), "Error: $message", Snackbar.LENGTH_LONG)
+                        Snackbar.make(requireView(), "Error: $message", Snackbar.LENGTH_LONG).show()
                     }
                 }
             }
