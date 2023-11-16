@@ -48,6 +48,13 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         viewModel.getPopularMoviesList()
         viewModel.getTopRatedMoviesList()
         viewModel.getUpcomingMoviesList()
+
+        binding.srlHome.setOnRefreshListener {
+            viewModel.getPopularMoviesList()
+            viewModel.getTopRatedMoviesList()
+            viewModel.getUpcomingMoviesList()
+        }
+
         setMovieFilter()
     }
 
