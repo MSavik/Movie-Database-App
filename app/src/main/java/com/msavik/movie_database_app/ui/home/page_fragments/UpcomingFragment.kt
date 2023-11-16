@@ -14,7 +14,7 @@ import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 class UpcomingFragment : Fragment(R.layout.fragment_upcoming) {
 
     private lateinit var binding: FragmentUpcomingBinding
-    private lateinit var homeFragment: HomeFragment
+    private var homeFragment: HomeFragment? = null
     private val viewModel: MovieViewModel by sharedViewModel()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -22,16 +22,16 @@ class UpcomingFragment : Fragment(R.layout.fragment_upcoming) {
         binding = FragmentUpcomingBinding.bind(view)
         homeFragment = requireParentFragment() as HomeFragment
 
-        homeFragment.upcomingMoviesList = viewModel.upcomingMovieListLiveData.value?.data ?: emptyList()
+        homeFragment?.upcomingMoviesList = viewModel.upcomingMovieListLiveData.value?.data ?: emptyList()
 
         binding.rvUpcoming.apply {
             layoutManager = LinearLayoutManager(
                 requireContext(),
                 RecyclerView.VERTICAL,
                 false)
-            adapter = homeFragment.upcomingMovieAdapter
+            adapter = homeFragment?.upcomingMovieAdapter
         }
-        homeFragment.upcomingMovieAdapter.submitList(homeFragment.upcomingMoviesList)
-        homeFragment.upcomingMovieAdapter.notifyDataSetChanged()
+        homeFragment?.upcomingMovieAdapter?.submitList(homeFragment?.upcomingMoviesList)
+        homeFragment?.upcomingMovieAdapter?.notifyDataSetChanged()
     }
 }

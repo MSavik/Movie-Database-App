@@ -43,6 +43,7 @@ dependencies {
     // Retrofit
     api "com.squareup.retrofit2:retrofit:${libVersions.retrofit}"
     api "com.squareup.retrofit2:converter-gson:${libVersions.retrofit}"
+    api "com.squareup.okhttp3:okhttp:${libVersions.okhttp}"
 
     // Coroutines
     api "org.jetbrains.kotlinx:kotlinx-coroutines-core:${libVersions.coroutines}"
@@ -65,9 +66,4 @@ dependencies {
     api "androidx.room:room-ktx:${libVersions.room}"
     annotationProcessor "androidx.room:room-compiler:${libVersions.room}"
     kapt "androidx.room:room-compiler:${libVersions.room}"
-    api "androidx.room:room-rxjava2:${libVersions.room}"
-    api "androidx.room:room-rxjava3:${libVersions.room}"
-    api "androidx.room:room-guava:${libVersions.room}"
-    // optional - Paging 3 Integration
-//    api "androidx.room:room-paging:2.5.0-beta01"
 }

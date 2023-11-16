@@ -14,7 +14,7 @@ import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 class TopRatedFragment : Fragment(R.layout.fragment_top_rated) {
 
     private lateinit var binding: FragmentTopRatedBinding
-    private lateinit var homeFragment: HomeFragment
+    private  var homeFragment: HomeFragment? = null
     private val viewModel: MovieViewModel by sharedViewModel()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -22,16 +22,16 @@ class TopRatedFragment : Fragment(R.layout.fragment_top_rated) {
         binding = FragmentTopRatedBinding.bind(view)
         homeFragment = requireParentFragment() as HomeFragment
 
-        homeFragment.topRatedMoviesList = viewModel.topRatedMovieListLiveData.value?.data ?: emptyList()
+        homeFragment?.topRatedMoviesList = viewModel.topRatedMovieListLiveData.value?.data ?: emptyList()
 
         binding.rvTopRated.apply {
             layoutManager = LinearLayoutManager(
                 requireContext(),
                 RecyclerView.VERTICAL,
                 false)
-            adapter = homeFragment.topRatedMovieAdapter
+            adapter = homeFragment?.topRatedMovieAdapter
         }
-        homeFragment.topRatedMovieAdapter.submitList(homeFragment.topRatedMoviesList)
-        homeFragment.topRatedMovieAdapter.notifyDataSetChanged()
+        homeFragment?.topRatedMovieAdapter?.submitList(homeFragment?.topRatedMoviesList)
+        homeFragment?.topRatedMovieAdapter?.notifyDataSetChanged()
     }
 }

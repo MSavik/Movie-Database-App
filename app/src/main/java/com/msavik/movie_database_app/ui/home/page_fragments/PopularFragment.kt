@@ -14,7 +14,7 @@ import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 class PopularFragment : Fragment(R.layout.fragment_popular) {
 
     private lateinit var binding: FragmentPopularBinding
-    private lateinit var homeFragment: HomeFragment
+    private var homeFragment: HomeFragment? = null
     private val viewModel: MovieViewModel by sharedViewModel()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -22,16 +22,16 @@ class PopularFragment : Fragment(R.layout.fragment_popular) {
         binding = FragmentPopularBinding.bind(view)
         homeFragment = requireParentFragment() as HomeFragment
 
-        homeFragment.popularMoviesList = viewModel.popularMovieListLiveData.value?.data ?: emptyList()
+        homeFragment?.popularMoviesList = viewModel.popularMovieListLiveData.value?.data ?: emptyList()
 
         binding.rvPopular.apply {
             layoutManager = LinearLayoutManager(
                 requireContext(),
                 RecyclerView.VERTICAL,
                 false)
-            adapter = homeFragment.popularMovieAdapter
+            adapter = homeFragment?.popularMovieAdapter
         }
-        homeFragment.popularMovieAdapter.submitList(homeFragment.popularMoviesList)
-        homeFragment.popularMovieAdapter.notifyDataSetChanged()
+        homeFragment?.popularMovieAdapter?.submitList(homeFragment?.popularMoviesList)
+        homeFragment?.popularMovieAdapter?.notifyDataSetChanged()
     }
 }

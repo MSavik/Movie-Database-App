@@ -132,7 +132,7 @@ class FavoriteFragment : Fragment(R.layout.fragment_favorite) {
             "movieId" to movieId.toString(),
             "page" to Page.FAVORITE.name
         )
-        findNavController().navigate(R.id.detailsFragment, bundle)
+        findNavController().navigate(R.id.action_favoriteFragment_to_detailsFragment, bundle)
     }
 
     companion object {

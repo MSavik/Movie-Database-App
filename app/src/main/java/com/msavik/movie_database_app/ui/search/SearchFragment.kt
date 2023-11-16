@@ -97,7 +97,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             "movieId" to movieId.toString(),
             "page" to Page.SEARCH.name
         )
-        findNavController().navigate(R.id.detailsFragment, bundle)
+        findNavController().navigate(R.id.action_searchFragment_to_detailsFragment, bundle)
     }
 
     companion object {

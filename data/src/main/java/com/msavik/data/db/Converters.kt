@@ -29,11 +29,6 @@ class Converters {
     }
 
     @TypeConverter
-    fun fromProductionCompanyList(productionCompanies: List<ProductionCompany>?): String? {
-        return Gson().toJson(productionCompanies)
-    }
-
-    @TypeConverter
     fun fromMovieGenre(movieGenre: MovieGenre?): String? {
         return movieGenre?.name
     }
@@ -41,6 +36,11 @@ class Converters {
     @TypeConverter
     fun toMovieGenre(name: String): MovieGenre {
         return MovieGenre(0, name)
+    }
+
+    @TypeConverter
+    fun fromProductionCompanyList(productionCompanies: List<ProductionCompany>?): String? {
+        return Gson().toJson(productionCompanies)
     }
 
     @TypeConverter

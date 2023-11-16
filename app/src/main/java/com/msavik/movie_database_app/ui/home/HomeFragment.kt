@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.appcompat.widget.SearchView
 import androidx.core.os.bundleOf
+import androidx.fragment.app.FragmentFactory
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayoutMediator
@@ -14,12 +15,16 @@ import com.msavik.domain.utility.Page
 import com.msavik.domain.utility.Resource
 import com.msavik.movie_database_app.R
 import com.msavik.movie_database_app.databinding.FragmentHomeBinding
+import com.msavik.movie_database_app.ui.home.page_fragments.PopularFragment
+import com.msavik.movie_database_app.ui.home.page_fragments.TopRatedFragment
+import com.msavik.movie_database_app.ui.home.page_fragments.UpcomingFragment
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private lateinit var binding: FragmentHomeBinding
     private val viewModel: MovieViewModel by sharedViewModel()
+
     val popularMovieAdapter = MovieAdapter { movieId ->
         onItemClick(movieId)
     }
@@ -29,17 +34,15 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     val upcomingMovieAdapter = MovieAdapter { movieId ->
         onItemClick(movieId)
     }
+
     var popularMoviesList: List<Movie> = emptyList()
     var topRatedMoviesList: List<Movie> = emptyList()
     var upcomingMoviesList: List<Movie> = emptyList()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        initObserver()
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        initObserver()
         binding = FragmentHomeBinding.bind(view)
 
         viewModel.getPopularMoviesList()
@@ -49,17 +52,16 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun initObserver() {
-        // viewModel.movieListLiveData.observe(viewLifecycleOwner)
-        viewModel.popularMovieListLiveData.observe(this) { response ->
+        viewModel.popularMovieListLiveData.observe(viewLifecycleOwner) { response ->
             when(response) {
                 is Resource.Loading -> {
                     binding.srlHome.isRefreshing = true
-                    Log.d(TAG, "Loading...")
+                    Log.d(TAG, "Loading popular movies...")
                 }
                 is Resource.Success -> {
                     response.data?.let { movieList ->
                         binding.srlHome.isRefreshing = false
-                        Log.d(TAG, "Success!")
+                        Log.d(TAG, "Success! Popular movies loaded")
                         popularMoviesList = movieList
 
                         Log.d(TAG, "LOGOBSERVER: $popularMoviesList")
@@ -70,57 +72,61 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 is Resource.Error -> {
                     response.message?.let { message ->
                         binding.srlHome.isRefreshing = false
-                        Log.e(TAG, "Error: $message")
+                        Log.e(TAG, "Error loading popular movies: $message")
                         Snackbar.make(requireView(), "Error: $message", Snackbar.LENGTH_LONG).show()
                     }
                 }
             }
         }
 
-        viewModel.topRatedMovieListLiveData.observe(this) { response ->
+        viewModel.topRatedMovieListLiveData.observe(viewLifecycleOwner) { response ->
             when(response) {
                 is Resource.Loading -> {
                     binding.srlHome.isRefreshing = true
-                    Log.d(TAG, "Loading...")
+                    Log.d(TAG, "Loading top rated movies...")
                 }
                 is Resource.Success -> {
                     response.data?.let { movieList ->
                         binding.srlHome.isRefreshing = false
-                        Log.d(TAG, "Success!")
+                        Log.d(TAG, "Success! Top rated movies loaded")
                         topRatedMoviesList = movieList
 
                         Log.d(TAG, "LOGOBSERVER: $topRatedMoviesList")
+
+                        initView()
                     }
                 }
                 is Resource.Error -> {
                     response.message?.let { message ->
                         binding.srlHome.isRefreshing = false
-                        Log.e(TAG, "Error: $message")
+                        Log.e(TAG, "Error loading top rated movies: $message")
                         Snackbar.make(requireView(), "Error: $message", Snackbar.LENGTH_LONG).show()
                     }
                 }
             }
         }
 
-        viewModel.upcomingMovieListLiveData.observe(this) { response ->
+        viewModel.upcomingMovieListLiveData.observe(viewLifecycleOwner) { response ->
             when(response) {
                 is Resource.Loading -> {
                     binding.srlHome.isRefreshing = true
-                    Log.d(TAG, "Loading...")
+                    Log.d(TAG, "Loading upcoming movies...")
                 }
                 is Resource.Success -> {
                     response.data?.let { movieList ->
                         binding.srlHome.isRefreshing = false
-                        Log.d(TAG, "Success!")
+                        Log.d(TAG, "Success! Upcoming movies loaded")
                         upcomingMoviesList = movieList
 
                         Log.d(TAG, "LOGOBSERVER: $upcomingMoviesList")
+
+                        initView()
                     }
                 }
                 is Resource.Error -> {
                     response.message?.let { message ->
                         binding.srlHome.isRefreshing = false
-                        Log.e(TAG, "Error: $message")
+                        Log.e(TAG, "Error loading upcoming movies: $message")
                         Snackbar.make(requireView(), "Error: $message", Snackbar.LENGTH_LONG).show()
                     }
                 }
@@ -144,7 +150,17 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun initViewPager() {
         binding.apply {
-            vpHome.adapter = HomePagerAdapter(this@HomeFragment)
+            val fragmentFactory = object : FragmentFactory() {
+                override fun instantiate(classLoader: ClassLoader, className: String): Fragment {
+                    return when (className) {
+                        PopularFragment::class.java.name -> PopularFragment()
+                        TopRatedFragment::class.java.name -> TopRatedFragment()
+                        UpcomingFragment::class.java.name -> UpcomingFragment()
+                        else -> super.instantiate(classLoader, className)
+                    }
+                }
+            }
+            vpHome.adapter = HomePagerAdapter(this@HomeFragment, fragmentFactory)
 
             TabLayoutMediator(tlHome, vpHome) { tabLayout, position ->
                 when(position) {
@@ -212,7 +228,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             "movieId" to movieId.toString(),
             "page" to page
         )
-        findNavController().navigate(R.id.detailsFragment, bundle)
+        findNavController().navigate(R.id.action_homeFragment_to_detailsFragment, bundle)
     }
 
     companion object {
