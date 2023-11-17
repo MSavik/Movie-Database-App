@@ -11,6 +11,7 @@ class HomePagerAdapter(
     private val fragment: Fragment,
     private val fragmentFactory: FragmentFactory
     ) : FragmentStateAdapter(fragment) {
+
     override fun getItemCount(): Int = 3
 
     override fun createFragment(position: Int): Fragment {
@@ -39,9 +40,7 @@ class HomePagerAdapter(
 
     override fun getItemId(position: Int): Long {
         return when(position) {
-            0 -> 0
-            1 -> 1
-            2 -> 2
+            0, 1, 2 -> position.toLong()
             else -> throw Exception("No pages")
         }
     }

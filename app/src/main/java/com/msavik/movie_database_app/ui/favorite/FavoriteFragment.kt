@@ -88,7 +88,7 @@ class FavoriteFragment : Fragment(R.layout.fragment_favorite) {
             }
 
             dialogBinding.btYes.setOnClickListener {
-                viewModel.deleteAllFavoriteMovies()
+                viewModel.deleteFavoriteMovieList()
                 dialog.dismiss()
             }
 

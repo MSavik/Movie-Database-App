@@ -25,17 +25,19 @@ class FavoriteViewModel(
             val response = getFavoriteMoviesListUseCase.execute()
             favoriteMovieListLiveData.postValue(Resource.Success(response))
         } catch (e: Exception) {
+            Log.e(DetailsViewModel.TAG, "getFavoriteMoviesList: $e")
             favoriteMovieListLiveData.postValue(Resource.Error(e.message ?: e.toString()))
         }
     }
 
-    fun deleteAllFavoriteMovies() = viewModelScope.launch(Dispatchers.IO) {
+    fun deleteFavoriteMovieList() = viewModelScope.launch(Dispatchers.IO) {
         try {
             deleteFavoriteMovieListUseCase.execute()
             val response = getFavoriteMoviesListUseCase.execute()
             favoriteMovieListLiveData.postValue(Resource.Success(response))
         } catch (e: Exception) {
-            Log.e(DetailsViewModel.TAG, "deleteAllFavoriteMovies: $e")
+            Log.e(DetailsViewModel.TAG, "deleteFavoriteMovieList: $e")
+            favoriteMovieListLiveData.postValue(Resource.Error(e.message ?: e.toString()))
         }
     }
 }

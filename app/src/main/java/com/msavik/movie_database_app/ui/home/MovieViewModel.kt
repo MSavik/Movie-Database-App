@@ -65,24 +65,33 @@ class MovieViewModel(
     fun deletePopularMovieList() = viewModelScope.launch(Dispatchers.IO) {
         try {
             deletePopularMovieListUseCase.execute()
+            val response = getPopularMoviesListUseCase.execute()
+            popularMovieListLiveData.postValue(Resource.Success(response))
         } catch (e: Exception) {
             Log.e(TAG, "deletePopularMovieList: $e")
+            popularMovieListLiveData.postValue(Resource.Error(e.message ?: e.toString()))
         }
     }
 
     fun deleteTopRatedMovieList() = viewModelScope.launch(Dispatchers.IO) {
         try {
             deleteTopRatedMovieListUseCase.execute()
+            val response = getTopRatedMoviesListUseCase.execute()
+            topRatedMovieListLiveData.postValue(Resource.Success(response))
         } catch (e: Exception) {
             Log.e(TAG, "deleteTopRatedMovieList: $e")
+            topRatedMovieListLiveData.postValue(Resource.Error(e.message ?: e.toString()))
         }
     }
 
     fun deleteUpcomingMovieList() = viewModelScope.launch(Dispatchers.IO) {
         try {
             deleteUpcomingMovieListUseCase.execute()
+            val response = getUpcomingMoviesListUseCase.execute()
+            upcomingMovieListLiveData.postValue(Resource.Success(response))
         } catch (e: Exception) {
             Log.e(TAG, "deleteUpcomingMovieList: $e")
+            upcomingMovieListLiveData.postValue(Resource.Error(e.message ?: e.toString()))
         }
     }
 
@@ -103,7 +112,7 @@ class MovieViewModel(
             val response = getTopRatedMoviesListUseCase.execute()
             topRatedMovieListLiveData.postValue(Resource.Success(response))
         } catch (e: Exception) {
-            Log.e(TAG, "updatePopularMoviesList")
+            Log.e(TAG, "updateTopRatedMoviesList")
             topRatedMovieListLiveData.postValue(Resource.Error(e.message ?: e.toString()))
         }
     }
@@ -114,7 +123,7 @@ class MovieViewModel(
             val response = getUpcomingMoviesListUseCase.execute()
             upcomingMovieListLiveData.postValue(Resource.Success(response))
         } catch (e: Exception) {
-            Log.e(TAG, "updatePopularMoviesList")
+            Log.e(TAG, "updateUpcomingMoviesList")
             upcomingMovieListLiveData.postValue(Resource.Error(e.message ?: e.toString()))
         }
     }
